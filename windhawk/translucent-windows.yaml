@@ -10,3 +10,38 @@ BackgroundEffects:
   type: mica
   AccentBlurBehind: "3A130F28"
 FlyoutsEffects: 1
+# Installer (Inno Setup, NSIS, MSI ...) zeichnen ihre Schrift fest in Schwarz.
+# Auf dem dunklen Mica-Hintergrund ist sie dann unlesbar (z. B. "Setup-Sprache
+# auswaehlen"), deshalb laufen sie ohne Moon-Effekte im normalen Windows-Look.
+# Inno Setup und viele andere Installer starten sich aus dem Temp-Ordner.
+# Beim Einfuegen von Hand %LOCALAPPDATA% durch den echten Pfad ersetzen
+# (z. B. C:\Users\Name\AppData\Local\Temp); der Moon Installer macht das selbst.
+RuledPrograms:
+  - target: '%LOCALAPPDATA%\Temp'
+    RenderingMod:
+      ThemeBackground: 0
+      AccentColorControls: 0
+    BackgroundEffects:
+      type: none
+      AccentBlurBehind: "3A232323"
+  - target: '%TEMP%'
+    RenderingMod:
+      ThemeBackground: 0
+      AccentColorControls: 0
+    BackgroundEffects:
+      type: none
+      AccentBlurBehind: "3A232323"
+  - target: msiexec.exe
+    RenderingMod:
+      ThemeBackground: 0
+      AccentColorControls: 0
+    BackgroundEffects:
+      type: none
+      AccentBlurBehind: "3A232323"
+  - target: setup.exe
+    RenderingMod:
+      ThemeBackground: 0
+      AccentColorControls: 0
+    BackgroundEffects:
+      type: none
+      AccentBlurBehind: "3A232323"
