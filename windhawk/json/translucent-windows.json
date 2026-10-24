@@ -7,7 +7,8 @@
   "managedKeys": [
     "BackgroundEffects",
     "FlyoutsEffects",
-    "RenderingMod"
+    "RenderingMod",
+    "RuledPrograms"
   ],
   "settings": {
     "RenderingMod.ThemeBackground": 1,
@@ -15,6 +16,26 @@
     "RenderingMod.AccentColorControls": 1,
     "BackgroundEffects.type": "mica",
     "BackgroundEffects.AccentBlurBehind": "3A130F28",
-    "FlyoutsEffects": 1
+    "FlyoutsEffects": 1,
+    "RuledPrograms[0].target": "%LOCALAPPDATA%\\Temp",
+    "RuledPrograms[0].RenderingMod.ThemeBackground": 0,
+    "RuledPrograms[0].RenderingMod.AccentColorControls": 0,
+    "RuledPrograms[0].BackgroundEffects.type": "none",
+    "RuledPrograms[0].BackgroundEffects.AccentBlurBehind": "3A232323",
+    "RuledPrograms[1].target": "%TEMP%",
+    "RuledPrograms[1].RenderingMod.ThemeBackground": 0,
+    "RuledPrograms[1].RenderingMod.AccentColorControls": 0,
+    "RuledPrograms[1].BackgroundEffects.type": "none",
+    "RuledPrograms[1].BackgroundEffects.AccentBlurBehind": "3A232323",
+    "RuledPrograms[2].target": "msiexec.exe",
+    "RuledPrograms[2].RenderingMod.ThemeBackground": 0,
+    "RuledPrograms[2].RenderingMod.AccentColorControls": 0,
+    "RuledPrograms[2].BackgroundEffects.type": "none",
+    "RuledPrograms[2].BackgroundEffects.AccentBlurBehind": "3A232323",
+    "RuledPrograms[3].target": "setup.exe",
+    "RuledPrograms[3].RenderingMod.ThemeBackground": 0,
+    "RuledPrograms[3].RenderingMod.AccentColorControls": 0,
+    "RuledPrograms[3].BackgroundEffects.type": "none",
+    "RuledPrograms[3].BackgroundEffects.AccentBlurBehind": "3A232323"
   }
 }

@@ -155,6 +155,15 @@ function Test-ModInstalled($Info, [string]$ModId) {
     } finally { $mods.Close() }
 }
 
+# Pfade in Prozessregeln (z. B. %LOCALAPPDATA%\Temp) gelten pro Benutzer: erst hier einsetzen,
+# denn Windhawk-Mods werten Umgebungsvariablen nicht aus
+function Get-MoonValue($Property) {
+    if ($Property.Value -is [string] -and $Property.Name -like 'RuledPrograms*') {
+        return [Environment]::ExpandEnvironmentVariables($Property.Value)
+    }
+    $Property.Value
+}
+
 # Prueft, ob die Moon-Werte bereits in Windhawk stehen
 function Test-MoonApplied($Info, $Mod) {
     $mods = Open-ModsKey $Info $false
@@ -165,7 +174,7 @@ function Test-MoonApplied($Info, $Mod) {
         try {
             foreach ($p in $Mod.settings.PSObject.Properties) {
                 $current = $k.GetValue($p.Name)
-                if ($null -eq $current -or "$current" -ne "$($p.Value)") { return $false }
+                if ($null -eq $current -or "$current" -ne "$(Get-MoonValue $p)") { return $false }
             }
             return $true
         } finally { $k.Close() }
@@ -190,7 +199,7 @@ function Set-MoonSettings($Info, $Mod) {
             }
             foreach ($p in $Mod.settings.PSObject.Properties) {
                 if ($p.Value -is [string]) {
-                    $settingsKey.SetValue($p.Name, $p.Value, [Microsoft.Win32.RegistryValueKind]::String)
+                    $settingsKey.SetValue($p.Name, (Get-MoonValue $p), [Microsoft.Win32.RegistryValueKind]::String)
                 } else {
                     $settingsKey.SetValue($p.Name, [int]$p.Value, [Microsoft.Win32.RegistryValueKind]::DWord)
                 }
